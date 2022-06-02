@@ -1,4 +1,4 @@
-
+# Protótipo de Blog
 
 - Aplicação criada para treinar os conceitos de fetch. 
 
@@ -13,4 +13,8 @@
 
 - Todo o código foi comentado para fixar o conteúdo e servir de referência posteriormente.
 
-- Os próximos passos serão a paginação do index e utilização de Bootstrap para o layout. 
+~~- Os próximos passos serão a paginação do index e utilização de Bootstrap para o layout.~~ 
+
+Ps.:
+
+- Paginação feita, o último passo será o design com Bootstrap.
