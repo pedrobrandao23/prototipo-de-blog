@@ -5,6 +5,8 @@ const url = "https://jsonplaceholder.typicode.com/posts";
 const loadingElement = document.querySelector("#loading");
 // Seleciona e armazena o container de posts do index
 const postsContainer = document.querySelector("#posts-container");
+// Seleciona e armazena o container de paginação do index
+const paginationContainer = document.querySelector("#pagination");
 
 // Seleciona e armazena todo o conteúdo da página de posts, com exceção do loading
 const postPage = document.querySelector("#post");
@@ -22,19 +24,66 @@ const bodyInput = document.querySelector("#body");
 const urlSearchParams = new URLSearchParams(window.location.search);
 const postId = urlSearchParams.get("id");
 
-// Get all posts (para o index)
+// Get all posts com paginação
 
-async function getAllPosts() {
-  // faz a requisição da API
+function pagination(page, total, limit) {
+  var pageSize = Math.ceil(total / limit);
+
+  var _pagination = {
+    page: page,
+    total: total,
+    limit: limit,
+    pages: pageSize,
+  };
+
+  if (page > 1) {
+    var prev = page - 1;
+    _pagination.previous = prev;
+  }
+
+  var remaining = total - page * limit;
+
+  if (remaining > 0) {
+    _pagination.next = page + 1;
+  }
+
+  return _pagination;
+}
+
+async function request() {
   const response = await fetch(url);
-  // armazena o json em uma variável
   const data = await response.json();
-  // esconde o loading
+
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(
+      /[?&]+([^=&]+)=([^&]*)/gi,
+      function (m, key, value) {
+        vars[key] = value;
+      }
+    );
+    return vars;
+  }
+
+  var array = data;
+  var pageQuery = getUrlVars()["pagina"];
+  var page = parseInt(pageQuery) || 1;
+  var limit = 5;
+  var offset = (page - 1) * limit;
+  var total = data.length;
+  var items = data.slice(offset, offset + limit);
+  var paginationResult = pagination(page, total, limit);
+
+  if (pageQuery > paginationResult.pages) {
+    postsContainer.innerHTML = "Nenhum item encontrado";
+  }
+
   loadingElement.classList.add("hide");
   // desmembra o json em cada post
-  data.map((post) => {
+  items.map((post) => {
     // cria os elementos HTML que vão receber os dados
     const div = document.createElement("div");
+
     const title = document.createElement("h2");
     const body = document.createElement("p");
     const link = document.createElement("a");
@@ -50,8 +99,28 @@ async function getAllPosts() {
     // inclui a div pai no index
     postsContainer.appendChild(div);
   });
-}
 
+  const ul = document.createElement("ul");
+  ul.classList.add("pagination");
+  var paginationItems = "";
+  for (let i = 0; i < paginationResult.pages; i++) {
+    var ativo = page === i + 1 ? "active" : "";
+    paginationItems +=
+      '<li class="page-item' +
+      " " +
+      ativo +
+      '"><a class="page-link" href="index.html?pagina=' +
+      (i + 1) +
+      '"">' +
+      (i + 1) +
+      "</a></li>";
+  }
+
+  ul.innerHTML = paginationItems;
+
+  paginationContainer.appendChild(ul);
+  console.log(paginationResult);
+}
 // Get individual post (para a página de post)
 
 async function getPost(id) {
@@ -121,7 +190,7 @@ async function postComment(comment) {
 
 // Se a url não tiver ID, mostra todos os posts, se tiver, mostra somente o do ID
 if (!postId) {
-  getAllPosts();
+  request();
 } else {
   getPost(postId);
 
