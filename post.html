@@ -9,13 +9,25 @@
     <link rel="stylesheet" href="/css/style.css"> 
 </head>
 <body>
+    <header>
+        <nav class="navbar bg-light">
+            <div class="container-fluid">
+                <a href="index.html"><img src="./assets/pblogo.png" alt="logo" width="40" height="20" class="ms-2" id="about" data-bs-toggle="modal" data-bs-target="#exampleModal"></a>
+                <button type="button" class="btn btn-primary me-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Blog Prototype
+                  </button>
+            </div>
+        </nav>
+    </header>
     <p id="loading">Carregando...</p>
-    <div id="post" >
-        <a href="index.html">Voltar</a>
+    <div id="post" class="container p-5">
         <div id="post-container"></div>
-        <h2>Comentários:</h2>
+        <div id="div-voltar">
+        <a href="index.html" id="voltar">Voltar</a>
+        </div>
+        <h2 class="mt-5">Comentários:</h2>
         <form id="comment-form">
-            <div>
+            <div class="mt-3">
                 <label for="email">Seu e-mail</label>
                 <input type="email" name="email" id="email" placeholder="Digite seu email" required>
             </div>
@@ -23,12 +35,43 @@
                 <label for="body">Seu comentário</label>
                 <textarea name="body" id="body" placeholder="Digite seu comentário" required></textarea>
             </div>
-            <input type="submit" value="Enviar">
+            <input type="submit" class="my-3" value="Enviar">
         </form>
-        <div id="comments-container"></div>
+        <div id="comments-container" class="mt-5 mb-5"></div>
     </div>
+
+        <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Olá :)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>
+            - Aplicação criada para treinar os conceitos de fetch. 
+                <br><br>
+            - Trata-se de uma simulação de um blog. 
+            <br><br>
+            - O script realiza a requisição e envio de dados para uma API, demonstrando os resultados na página, através dos métodos: 
+            <br><br>
+              - GET: demonstra todos as postagens da API no index.html e individualmente no post.html
+              <br><br>
+              - POST: cada postagem possui uma seção de comentários e o usuário pode publicar um novo, que aparecerá na lista, após o envio. 
+              <br><br>
+            - A API utilizada é "mockada", portanto somente simula as rotas, sem armazená-las em banco de dados. 
+        </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
     
-    <script src="/js/scripts.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/js/scripts.js" defer></script>
 </body>
 </html>

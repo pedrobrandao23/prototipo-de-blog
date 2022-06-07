@@ -68,7 +68,7 @@ async function request() {
   var array = data;
   var pageQuery = getUrlVars()["pagina"];
   var page = parseInt(pageQuery) || 1;
-  var limit = 5;
+  var limit = 10;
   var offset = (page - 1) * limit;
   var total = data.length;
   var items = data.slice(offset, offset + limit);
@@ -85,8 +85,14 @@ async function request() {
     const div = document.createElement("div");
 
     const title = document.createElement("h2");
+    title.classList.add("mt-5")
+
     const body = document.createElement("p");
+    body.classList.add("my-5")
+
     const link = document.createElement("a");
+    
+    const divLine = document.createElement("hr");
     // inclui os dados do json nos elementos e cria um botão para direcionar ao post
     title.innerText = post.title;
     body.innerText = post.body;
@@ -96,6 +102,7 @@ async function request() {
     div.appendChild(title);
     div.appendChild(body);
     div.appendChild(link);
+    div.appendChild(divLine);
     // inclui a div pai no index
     postsContainer.appendChild(div);
   });
@@ -138,12 +145,18 @@ async function getPost(id) {
 
   // cria os elementos do post
   const title = document.createElement("h1");
+  const image = document.createElement("img");
+  const legenda = document.createElement("h6");
   const body = document.createElement("p");
   // insere os dados do json nos elementos criados
   title.innerText = dataPost.title;
+  image.setAttribute("src", "https://picsum.photos/600/300");
+  legenda.innerText = "Aqui faço a requisição do POST de acordo com a query da URL. Adicionei uma imagem aleatória para enriquecer o layout. Ao fim, faço outra request, desta vez dos comentários. É possível enviar um comentário para a API, ele aparecerá ao final da lista."
   body.innerText = dataPost.body;
   // insere o post no html
   postContainer.appendChild(title);
+  postContainer.appendChild(legenda);
+  postContainer.appendChild(image);
   postContainer.appendChild(body);
 
   // cria o comentário com a função createComment a partir do map
@@ -157,7 +170,9 @@ function createComment(comment) {
   // cria os elementos dos comentários
   const div = document.createElement("div");
   const email = document.createElement("h3");
+  email.classList.add("mt-5")
   const commentBody = document.createElement("p");
+  commentBody.classList.add("mt-3")
   // insere os dados do json nos elementos criados
   email.innerText = comment.email;
   commentBody.innerText = comment.body;
@@ -208,3 +223,12 @@ if (!postId) {
     postComment(comment);
   });
 }
+// --------------------------------------------------------------
+// Modal
+
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('about')
+
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})

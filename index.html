@@ -1,22 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-    <h1>Posts do blog</h1>
-    <p id="loading">Carregando...</p>
-    <div id="posts-container"></div>
-    <div class="pagination mt-5 justify-content-center flex-row">
-        <nav aria-label="Page navigation example" id="pagination"></nav>
+    <header>
+        <nav class="navbar bg-light">
+            <div class="container-fluid">
+                <a href="index.html"><img src="./assets/pblogo.png" alt="logo" width="40" height="20" class="ms-2" id="about" data-bs-toggle="modal" data-bs-target="#exampleModal"></a>
+                <button type="button" class="btn btn-primary me-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Blog Prototype
+                  </button>
+            </div>
+        </nav>
+    </header>
+    <div class="container p-5">
+        <h1>Posts do blog</h1>
+        <h6>Aqui faço a requisição de todos os posts da API, dividos pela paginação, ao final da página</h6>
+        <p id="loading">Carregando...</p>
+        <div id="posts-container"></div>
+        <div id="demo" class="pagination mt-5 justify-content-center flex-row">
+            <nav aria-label="Page navigation" id="pagination" class="text-dark"></nav>
+        </div>
     </div>
-    
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Olá :)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>
+            - Aplicação criada para treinar os conceitos de fetch. 
+                <br><br>
+            - Trata-se de uma simulação de um blog. 
+            <br><br>
+            - O script realiza a requisição e envio de dados para uma API, demonstrando os resultados na página, através dos métodos: 
+            <br><br>
+              - GET: demonstra todos as postagens da API no index.html e individualmente no post.html
+              <br><br>
+              - POST: cada postagem possui uma seção de comentários e o usuário pode publicar um novo, que aparecerá na lista, após o envio. 
+              <br><br>
+            - A API utilizada é "mockada", portanto somente simula as rotas, sem armazená-las em banco de dados. 
+        </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="/js/scripts.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
+
 </html>
